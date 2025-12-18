@@ -1,0 +1,57 @@
+Polling.jsx
+
+import React, { useState } from "react";
+import "./Poll.css";
+
+function Polling() {
+  const [votes, setVotes] = useState({
+    ai: 0,
+    iot: 0,
+  });
+
+  const totalVotes = votes.ai + votes.iot;
+
+  const voteAI = () => {
+    setVotes({ ...votes, ai: votes.ai + 1 });
+  };
+
+  const voteIoT = () => {
+    setVotes({ ...votes, iot: votes.iot + 1 });
+  };
+
+  return (
+    <div className="poll-container">
+      <h2> Classroom Elective Poll</h2>
+      <p>Vote for your preferred elective subject</p>
+
+      <div className="poll-card">
+        <h3>AI / Machine Learning</h3>
+        <button onClick={voteAI}>Vote</button>
+        <p>{votes.ai} votes ({totalVotes ? ((votes.ai / totalVotes) * 100).toFixed(0) : 0}%)</p>
+      </div>
+
+      <div className="poll-card">
+        <h3>Internet of Things (IoT)</h3>
+        <button onClick={voteIoT}>Vote</button>
+        <p>{votes.iot} votes ({totalVotes ? ((votes.iot / totalVotes) * 100).toFixed(0) : 0}%)</p>
+      </div>
+    </div>
+  );
+}
+
+export default Polling;
+
+App.jsx (Polling)
+
+import React from "react";
+import Polling from "./Polling";
+
+function App() {
+  return (
+    <div style={{ background: "#4f46e5", minHeight: "100vh", padding: "40px" }}>
+      <Polling />
+    </div>
+  );
+}
+
+export default App;
