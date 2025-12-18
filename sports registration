@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+
+export default function SportsRegistration() {
+  const [name, setName] = useState("");
+  const [sport, setSport] = useState("");
+  const [gender, setGender] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(
+      `Registration Successful!\nName: ${name}\nSport: ${sport}\nGender: ${gender}`
+    );
+
+    // clear form
+    setName("");
+    setSport("");
+    setGender("");
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial", width: "300px" }}>
+      <h2>Sports Registration</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <br />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Select Sport:</label>
+          <br />
+          <select
+            value={sport}
+            onChange={(e) => setSport(e.target.value)}
+            required
+          >
+            <option value="">--Select--</option>
+            <option>Cricket</option>
+            <o
