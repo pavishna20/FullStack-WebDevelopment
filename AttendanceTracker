@@ -1,0 +1,42 @@
+import React, { useState } from "react";
+
+export default function AttendanceTracker() {
+  const [students, setStudents] = useState([
+    { name: "Arun", present: false },
+    { name: "Priya", present: false },
+    { name: "Karthik", present: false },
+  ]);
+
+  const markAttendance = (index) => {
+    const updatedStudents = [...students];
+    updatedStudents[index].present = !updatedStudents[index].present;
+    setStudents(updatedStudents);
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h2>Attendance Tracker</h2>
+
+      {students.map((student, index) => (
+        <div key={index} style={{ marginBottom: "10px" }}>
+          <span style={{ marginRight: "15px" }}>{student.name}</span>
+          <button onClick={() => markAttendance(index)}>
+            {student.present ? "Present" : "Absent"}
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+import React from "react";
+import AttendanceTracker from "./AttendanceTracker";
+
+function App() {
+  return (
+    <div>
+      <AttendanceTracker />
+    </div>
+  );
+}
+
+export default App;
