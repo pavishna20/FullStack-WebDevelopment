@@ -1,0 +1,102 @@
+import React, { useState } from "react";
+
+export default function StudentRegistration() {
+  const [name, setName] = useState("");
+  const [rollNo, setRollNo] = useState("");
+  const [department, setDepartment] = useState("");
+  const [gender, setGender] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(
+      `Registration Successful!\n
+Name: ${name}
+Roll No: ${rollNo}
+Department: ${department}
+Gender: ${gender}`
+    );
+
+    // Clear form
+    setName("");
+    setRollNo("");
+    setDepartment("");
+    setGender("");
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial", width: "320px" }}>
+      <h2>Student Registration</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <br />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Roll No:</label>
+          <br />
+          <input
+            type="text"
+            value={rollNo}
+            onChange={(e) => setRollNo(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Department:</label>
+          <br />
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            required
+          >
+            <option value="">--Select--</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>IT</option>
+            <option>Mechanical</option>
+          </select>
+        </div>
+
+        <br />
+
+        <div>
+          <label>Gender:</label>
+          <br />
+          <input
+            type="radio"
+            value="Male"
+            checked={gender === "Male"}
+            onChange={(e) => setGender(e.target.value)}
+          />{" "}
+          Male
+          <br />
+          <input
+            type="radio"
+            value="Female"
+            checked={gender === "Female"}
+            onChange={(e) => setGender(e.target.value)}
+          />{" "}
+          Female
+        </div>
+
+        <br />
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
+}
