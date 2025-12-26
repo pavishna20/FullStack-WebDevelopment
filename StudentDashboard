@@ -1,0 +1,133 @@
+import React, { useState } from "react";
+
+export default function StudentDashboard() {
+  const [page, setPage] = useState("dashboard");
+
+  const students = [
+    { id: 1, name: "Arun", dept: "CSE", year: "III" },
+    { id: 2, name: "Priya", dept: "ECE", year: "II" },
+    { id: 3, name: "Karthik", dept: "IT", year: "IV" },
+    { id: 4, name: "Divya", dept: "CSE", year: "I" },
+  ];
+
+  return (
+    <div style={styles.container}>
+      {/* NAVIGATION BAR */}
+      <div style={styles.nav}>
+        <span style={styles.logo}>🎓 Student Portal</span>
+        <div>
+          <button style={styles.navBtn} onClick={() => setPage("dashboard")}>
+            Dashboard
+          </button>
+          <button style={styles.navBtn} onClick={() => setPage("students")}>
+            Students
+          </button>
+          <button style={styles.navBtn} onClick={() => setPage("attendance")}>
+            Attendance
+          </button>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div style={styles.content}>
+        {page === "dashboard" && (
+          <div style={styles.grid}>
+            <div style={styles.card}>
+              <h3>Total Students</h3>
+              <p style={styles.big}>{students.length}</p>
+            </div>
+            <div style={styles.card}>
+              <h3>Departments</h3>
+              <p style={styles.big}>CSE, ECE, IT</p>
+            </div>
+            <div style={styles.card}>
+              <h3>Academic Year</h3>
+              <p style={styles.big}>2024–2025</p>
+            </div>
+          </div>
+        )}
+
+        {page === "students" && (
+          <div>
+            <h2>👩‍🎓 Student List</h2>
+            <table style={styles.table}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((s) => (
+                  <tr key={s.id}>
+                    <td>{s.name}</td>
+                    <td>{s.dept}</td>
+                    <td>{s.year}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {page === "attendance" && (
+          <div style={styles.card}>
+            <h2>📋 Attendance</h2>
+            <p>Attendance tracking module can be integrated here.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI, sans-serif",
+    background: "#f4f6f8",
+    minHeight: "100vh",
+  },
+  nav: {
+    background: "#1976d2",
+    color: "#fff",
+    padding: "15px 20px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  logo: {
+    fontSize: "20px",
+    fontWeight: "bold",
+  },
+  navBtn: {
+    marginLeft: "10px",
+    padding: "8px 14px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+  content: {
+    padding: "30px",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: "20px",
+  },
+  card: {
+    background: "#fff",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  },
+  big: {
+    fontSize: "22px",
+    fontWeight: "bold",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    background: "#fff",
+  },
+};
