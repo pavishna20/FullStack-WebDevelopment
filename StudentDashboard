@@ -11,10 +11,10 @@ export default function StudentDashboard() {
   ];
 
   return (
-    <div style={styles.container}>
-      {/* NAVIGATION BAR */}
+    <div style={styles.page}>
+      {/* NAV BAR */}
       <div style={styles.nav}>
-        <span style={styles.logo}>🎓 Student Portal</span>
+        <h2 style={{ margin: 0 }}>🎓 Student Manager</h2>
         <div>
           <button style={styles.navBtn} onClick={() => setPage("dashboard")}>
             Dashboard
@@ -31,24 +31,26 @@ export default function StudentDashboard() {
       {/* CONTENT */}
       <div style={styles.content}>
         {page === "dashboard" && (
-          <div style={styles.grid}>
-            <div style={styles.card}>
+          <div style={styles.cardGrid}>
+            <div style={{ ...styles.card, background: "linear-gradient(135deg,#ff9a9e,#fad0c4)" }}>
               <h3>Total Students</h3>
               <p style={styles.big}>{students.length}</p>
             </div>
-            <div style={styles.card}>
+
+            <div style={{ ...styles.card, background: "linear-gradient(135deg,#a1c4fd,#c2e9fb)" }}>
               <h3>Departments</h3>
               <p style={styles.big}>CSE, ECE, IT</p>
             </div>
-            <div style={styles.card}>
+
+            <div style={{ ...styles.card, background: "linear-gradient(135deg,#84fab0,#8fd3f4)" }}>
               <h3>Academic Year</h3>
-              <p style={styles.big}>2024–2025</p>
+              <p style={styles.big}>2024 – 2025</p>
             </div>
           </div>
         )}
 
         {page === "students" && (
-          <div>
+          <div style={styles.tableCard}>
             <h2>👩‍🎓 Student List</h2>
             <table style={styles.table}>
               <thead>
@@ -62,7 +64,9 @@ export default function StudentDashboard() {
                 {students.map((s) => (
                   <tr key={s.id}>
                     <td>{s.name}</td>
-                    <td>{s.dept}</td>
+                    <td>
+                      <span style={styles.badge}>{s.dept}</span>
+                    </td>
                     <td>{s.year}</td>
                   </tr>
                 ))}
@@ -74,7 +78,7 @@ export default function StudentDashboard() {
         {page === "attendance" && (
           <div style={styles.card}>
             <h2>📋 Attendance</h2>
-            <p>Attendance tracking module can be integrated here.</p>
+            <p>Attendance module can be added here.</p>
           </div>
         )}
       </div>
@@ -82,52 +86,79 @@ export default function StudentDashboard() {
   );
 }
 
+/* ---------------- STYLES ---------------- */
+
 const styles = {
-  container: {
-    fontFamily: "Segoe UI, sans-serif",
-    background: "#f4f6f8",
+  page: {
     minHeight: "100vh",
-  },
-  nav: {
-    background: "#1976d2",
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    fontFamily: "Segoe UI, sans-serif",
     color: "#fff",
-    padding: "15px 20px",
+  },
+
+  nav: {
+    background: "rgba(0,0,0,0.7)",
+    padding: "15px 30px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  logo: {
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
+
   navBtn: {
     marginLeft: "10px",
-    padding: "8px 14px",
+    padding: "8px 16px",
+    borderRadius: "20px",
     border: "none",
-    borderRadius: "6px",
     cursor: "pointer",
-  },
-  content: {
-    padding: "30px",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px",
-  },
-  card: {
     background: "#fff",
-    padding: "20px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  },
-  big: {
-    fontSize: "22px",
+    color: "#333",
     fontWeight: "bold",
   },
+
+  content: {
+    padding: "40px",
+  },
+
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: "25px",
+  },
+
+  card: {
+    padding: "25px",
+    borderRadius: "18px",
+    color: "#222",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+    background: "#fff",
+  },
+
+  big: {
+    fontSize: "28px",
+    fontWeight: "bold",
+  },
+
+  tableCard: {
+    background: "#fff",
+    color: "#333",
+    padding: "25px",
+    borderRadius: "18px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+  },
+
   table: {
     width: "100%",
     borderCollapse: "collapse",
-    background: "#fff",
+  },
+
+  badge: {
+    background: "#1976d2",
+    color: "#fff",
+    padding: "4px 10px",
+    borderRadius: "12px",
+    fontSize: "12px",
   },
 };
